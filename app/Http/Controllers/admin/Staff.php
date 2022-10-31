@@ -18,7 +18,6 @@ class Staff extends Controller
     public function index()
     {
         $staffs = User::all();
-        // dd(['staffs' => $staffs]);
         return view('admin.staff', ['staffs' => $staffs]);
     }
 
@@ -40,7 +39,6 @@ class Staff extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'firstname' => 'string|max:50',
             'lastname' => 'string|max:50',
@@ -86,7 +84,6 @@ class Staff extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        // dd($user);
         return view('admin.edit', ['user' => $user]);
     }
 
@@ -99,7 +96,17 @@ class Staff extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone_number = $request->phone_number;
+
+        $user->save();
+
+        return redirect()->route('index.staff');
     }
 
     /**
@@ -110,6 +117,8 @@ class Staff extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('index.staff');
     }
 }

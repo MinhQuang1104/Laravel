@@ -31,27 +31,27 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                         <label>First name</label>
-                        <input type="text" class="form-control" name="firstname" placeholder="Enter ...">
+                        <input type="text" class="form-control" name="firstname" value="{{$user->firstname}}" placeholder="Enter ...">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                         <label>Last name</label>
-                        <input type="text" class="form-control" name="lastname" placeholder="Enter ...">
+                        <input type="text" class="form-control" name="lastname" value="{{$user->lastname}}" placeholder="Enter ...">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter email">
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" value="{{$user->email}}" placeholder="Enter email">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputAddress1">Address</label>
-                    <input type="text" class="form-control" id="exampleInputAddress1" name="address" placeholder="Enter Address">
+                    <input type="text" class="form-control" id="exampleInputAddress1" name="address" value="{{$user->address}}" placeholder="Enter Address">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPhoneNumber1">Phone number</label>
-                    <input type="text" class="form-control" id="exampleInputPhoneNumber1" name="phone_number" placeholder="Enter Phone number">
+                    <input type="text" class="form-control" id="exampleInputPhoneNumber1" name="phone_number" value="{{$user->phone_number}}" placeholder="Enter Phone number">
                 </div>
             </div>
             <div class="card-footer">
