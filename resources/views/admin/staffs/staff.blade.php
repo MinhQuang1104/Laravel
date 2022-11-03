@@ -9,7 +9,7 @@
           </div>
           <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item active">Staff Page</li>
               </ol>
           </div>
@@ -24,7 +24,7 @@
         <div class="card-header">
             <div class="card-tools">
                 <div>
-                    <a href="{{route('create')}}" class="btn btn-primary btn-block">Create New</a>
+                    <a href="{{route('create.staff')}}" class="btn btn-primary btn-block">Create New</a>
                 </div>
             </div>
         </div>
@@ -52,10 +52,10 @@
                         <td>{{$staff->address}}</td>
                         <td>{{$staff->phone_number}}</td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{route('edit', [$staff->id])}}">
+                            <a class="btn btn-info btn-sm" href="{{route('edit.staff', [$staff->id])}}">
                                 <i class="fas fa-pencil-alt"></i> Edit
                             </a>
-                            <a class="btn btn-danger btn-sm" href="{{route('delete', [$staff->id])}}">
+                            <a class="btn btn-danger btn-sm" href="{{route('delete.staff', [$staff->id])}}">
                                 <i class="fas fa-trash"></i> Delete
                             </a>
                         </td>

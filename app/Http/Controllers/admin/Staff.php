@@ -18,7 +18,7 @@ class Staff extends Controller
     public function index()
     {
         $staffs = User::all();
-        return view('admin.staff', ['staffs' => $staffs]);
+        return view('admin.staffs.staff', ['staffs' => $staffs]);
     }
 
     /**
@@ -28,7 +28,7 @@ class Staff extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        return view('admin.staffs.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class Staff extends Controller
         ]);
 
         if($validator->fails()) {
-            return redirect('create')
+            return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -65,17 +65,6 @@ class Staff extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -84,7 +73,7 @@ class Staff extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.edit', ['user' => $user]);
+        return view('admin.staffs.edit', ['user' => $user]);
     }
 
     /**
