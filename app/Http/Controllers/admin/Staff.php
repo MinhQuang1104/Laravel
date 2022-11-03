@@ -40,10 +40,10 @@ class Staff extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'firstname' => 'string|max:50',
-            'lastname' => 'string|max:50',
-            'email' => 'string|email|max:60|unique:users,email',
-            'password' => 'string|min:6|max:60'
+            'firstname' => 'string|max:50|required',
+            'lastname' => 'string|max:50|required',
+            'email' => 'string|email|max:60|unique:users,email|required',
+            'password' => 'string|min:6|max:60|required'
         ]);
 
         if($validator->fails()) {
@@ -86,10 +86,10 @@ class Staff extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'firstname' => 'string|max:50',
-            'lastname' => 'string|max:50',
-            'email' => 'string|email|max:60|unique:users,email',
-            'password' => 'string|min:6|max:60'
+            'firstname' => 'string|max:50|required',
+            'lastname' => 'string|max:50|required',
+            'email' => 'string|email|max:60|required',
+            'password' => 'string|min:6|max:60|required'
         ]);
 
         if($validator->fails()) {

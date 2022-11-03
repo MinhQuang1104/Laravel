@@ -113,12 +113,17 @@ class Product extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|max:50|required',
-            'sku'  => 'string|max:50|unique:products,sku|required',
+            'sku'  => 'string|max:50|required',
             'weight' => 'string|max:50',
             'dimension' => 'string|max:50',
             'price' => 'required',
             'status_id' => 'required',
             'category_id' => 'required'
+        ], 
+        [], 
+        [
+            'status_id' => 'status',
+            'category_id' => 'category'
         ]);
 
         if($validator->fails()) {
