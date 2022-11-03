@@ -85,6 +85,19 @@ class Staff extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'string|max:50',
+            'lastname' => 'string|max:50',
+            'email' => 'string|email|max:60|unique:users,email',
+            'password' => 'string|min:6|max:60'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
         $user = User::findOrFail($id);
         
         $user->firstname = $request->firstname;
