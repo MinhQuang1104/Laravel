@@ -10,4 +10,8 @@ class Discount_type extends Model
     use HasFactory;
 
     protected $table = 'discount_types';
+
+    protected $fillable = [
+        'type_name'
+    ];
 }

@@ -63,11 +63,71 @@
           </li>
 
           {{-- Product management --}}
-          <li class="nav-item">
-            <a href="{{route('index.product')}}" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Products</p>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shapes"></i>
+              <p>
+                Product management
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
+            <ul class="nav nav-treeview">
+              {{-- Product --}}
+              <li class="nav-item">
+                <a href="{{route('index.product')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Products</p>
+                </a>
+              </li>
+
+              {{-- Product Category --}}
+              <li class="nav-item">
+                <a href="{{ route('index.category') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Category</p>
+                </a>
+              </li>
+
+              {{-- Product Discount Type --}}
+              <li class="nav-item">
+                <a href="{{ route('index.discount-type') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Discount Type</p>
+                </a>
+              </li>
+
+              {{-- Product Size --}}
+              <li class="nav-item">
+                <a href="{{ route('index.size') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Size</p>
+                </a>
+              </li>
+
+              {{-- Product Color --}}
+              <li class="nav-item">
+                <a href="{{ route('index.color') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Color</p>
+                </a>
+              </li>
+
+              {{-- Product Wish List --}}
+              <li class="nav-item">
+                <a href="{{ route('index.wish-list') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Wish List</p>
+                </a>
+              </li>
+
+              {{-- Product Tag --}}
+              <li class="nav-item">
+                <a href="{{ route('index.tag') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tag</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">

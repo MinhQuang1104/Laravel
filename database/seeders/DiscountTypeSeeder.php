@@ -14,8 +14,10 @@ class DiscountTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('discount_types')->insert([
-            'type_name' => '%'
-        ]);
+        if(DB::table('discount_types')->count() == 0) {
+            DB::table('discount_types')->insert([
+                'type_name' => '%'
+            ]);
+        }
     }
 }

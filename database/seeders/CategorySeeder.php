@@ -14,14 +14,16 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
-            'name' => 'Head phone',
-            'quantity' => '2'
-        ]);
+        if(DB::table('categories')->count() == 0) {
+            DB::table('categories')->insert([
+                'name' => 'Head phone',
+                'quantity' => '20'
+            ]);
 
-        DB::table('categories')->insert([
-            'name' => 'Watch',
-            'quantity' => '2'
-        ]);
+            DB::table('categories')->insert([
+                'name' => 'Watch',
+                'quantity' => '20'
+            ]);
+        }
     }
 }

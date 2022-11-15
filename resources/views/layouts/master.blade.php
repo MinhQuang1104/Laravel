@@ -15,6 +15,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('vendors/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('vendors/dist/css/adminlte.min.css') }}">
+  <!-- Color Picker -->
+  <link rel="stylesheet" href="{{ asset('vendors/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+  <!-- Summernote -->
+  <link rel="stylesheet" href="{{ asset('vendors/plugins/summernote/summernote-bs4.min.css') }}">
+  <!-- Select Multiple, Select2 -->
+  <link rel="stylesheet" href="{{ asset('vendors/plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendors/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -53,5 +60,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('vendors/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('vendors/dist/js/adminlte.min.js') }}"></script>
+<!-- Color Picker -->
+<script src="{{ asset('vendors/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<!-- Select Multiple, Select2 -->
+<script src="{{ asset('vendors/plugins/select2/js/select2.full.min.js') }}"></script>
+<!-- Summernote -->
+<script src="{{ asset('vendors/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<!-- Custom file input -->
+<script src="{{ asset('vendors/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 </body>
 </html>

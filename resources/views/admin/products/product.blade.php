@@ -4,15 +4,15 @@
   <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-              <h1 class="m-0">Product Page</h1>
-          </div>
-          <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active">Product Page</li>
-              </ol>
-          </div>
+            <div class="col-sm-6">
+                <h1 class="m-0">Product Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                    <li class="breadcrumb-item active">Product Page</li>
+                </ol>
+            </div>
         </div>
     </div>
   </div>
@@ -57,6 +57,9 @@
                         <td>{{$product->description}}</td>
                         <td>{{$product->category->name}}</td>
                         <td>
+                            <a class="btn btn-primary btn-sm" href="{{ route('view.product', [$product->id]) }}">
+                                <i class="fas fa-folder"></i>View
+                            </a>
                             <a class="btn btn-info btn-sm" href="{{route('edit.product', [$product->id])}}">
                                 <i class="fas fa-pencil-alt"></i> Edit
                             </a>

@@ -18,8 +18,14 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             DiscountTypeSeeder::class,
-            StatusSeeder::class,
-            ProductSeeder::class
+            ProductSeeder::class,
+            TagSeeder::class,
+            ProductTagSeeder::class,
+            WishListSeeder::class,
+            ColorSeeder::class,
+            SizeSeeder::class,
+            GeneralInfoSeeder::class,
+            ImageSeeder::class
         ]);
     }
 }
