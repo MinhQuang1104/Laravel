@@ -65,7 +65,17 @@ class Product extends Controller
             'weight' => 'string|max:50',
             'dimension' => 'string|max:50',
             'price' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'color_id' => 'required',
+            'size_id' => 'required',
+            'quantity' => 'required',
+            'price' => 'required'
+        ],
+        [],
+        [
+            'category_id' => 'category',
+            'color_id' => 'color',
+            'size_id' => 'size'
         ]);
 
         if($validator->fails()) {
@@ -184,11 +194,17 @@ class Product extends Controller
             'weight' => 'string|max:50',
             'dimension' => 'string|max:50',
             'price' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'color_id' => 'required',
+            'size_id' => 'required',
+            'quantity' => 'required',
+            'price' => 'required'
         ], 
         [], 
         [
-            'category_id' => 'category'
+            'category_id' => 'category',
+            'color_id' => 'color',
+            'size_id' => 'size'
         ]);
 
         if($validator->fails()) {
