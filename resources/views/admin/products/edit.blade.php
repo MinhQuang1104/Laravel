@@ -239,8 +239,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div>                
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-four-detail" role="tabpanel" aria-labelledby="custom-tabs-four-detail-tab">
                         <div class="form-group">
@@ -255,8 +254,10 @@
                                     </tr>
                                 </thead>
                                 <tbody id="dynamicadd">
+                                    <?php $count = 0 ?>
                                     @foreach ($product->general_info as $key => $items)
                                         <tr id="row{{$key}}">
+                                            <input type="hidden" name="countRow[{{ $count++ }}]" class="form-control text-center">
                                             <td>
                                                 <select class="form-control" name="product_color_id[]">
                                                     <option></option>
@@ -347,8 +348,9 @@
         var i = 1;
         $('#addRow').click(function() {
             i++;
-            $('#dynamicadd').append('<tr id="row'+i+'"><td><select class="form-control" name="product_color_id[]"><option></option> @foreach ($colors as $color)<option value="{{$color->id}}">{{$color->name}}</option> @endforeach </select></td><td><select class="form-control" name="product_size_id[]"><option></option> @foreach ($sizes as $size)<option value="{{$size->id}}">{{$size->name}}</option> @endforeach </select></td><td><input type="text" name="quantity[]" class="form-control text-center"></td><td><input type="text" name="price2[]" class="form-control text-center"></td><td><button type="button" id="'+i+'" class="btn btn-danger deleteRow">-</button></td></tr>');
+            $('#dynamicadd').append('<tr id="row'+i+'"><input type="hidden" name="countRow[{{ $count++ }}]" class="form-control text-center"><td><select class="form-control" name="product_color_id[]"><option></option> @foreach ($colors as $color)<option value="{{$color->id}}">{{$color->name}}</option> @endforeach </select></td><td><select class="form-control" name="product_size_id[]"><option></option> @foreach ($sizes as $size)<option value="{{$size->id}}">{{$size->name}}</option> @endforeach </select></td><td><input type="text" name="quantity[]" class="form-control text-center"></td><td><input type="text" name="price2[]" class="form-control text-center"></td><td><button type="button" id="'+i+'" class="btn btn-danger deleteRow">-</button></td></tr>');
         });
+
         $(document).on('click', '.deleteRow', function() {
             var row_id = $(this).attr('id');
             $('#row' + row_id + '').remove();

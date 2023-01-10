@@ -322,6 +322,7 @@
             i++
             $('#dynamicadd').append('<tr id="row'+i+'"><td><select class="form-control" name="product_color_id[]"><option></option> @foreach ($colors as $color)<option value="{{$color->id}}" @if($color->id == old("product_color_id")) selected @endif>{{$color->name}}</option> @endforeach </select></td><td><select class="form-control" name="product_size_id[]"><option></option> @foreach ($sizes as $size)<option value="{{$size->id}}" @if($size->id == old("product_size_id")) selected @endif>{{$size->name}}</option> @endforeach </select></td><td><input type="text" name="quantity[]" class="form-control text-center"></td><td><input type="text" name="price2[]" class="form-control text-center"></td><td><button type="button" id="'+i+'" class="btn btn-danger deleteRow">-</button></td></tr>');
         });
+        
         $(document).on('click', '.deleteRow', function() {
             var row_id = $(this).attr('id');
             $('#row' + row_id + '').remove();

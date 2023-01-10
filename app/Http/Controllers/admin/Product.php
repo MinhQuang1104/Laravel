@@ -44,11 +44,13 @@ class Product extends Controller
         $colors = Color::all();
         $sizes = Size::all();
 
-        return view('admin.products.create', ['categories' => $categories, 
-                                                'discount_types' => $discount_types,
-                                                'tags' => $tags,
-                                                'colors' => $colors,
-                                                'sizes' => $sizes]);
+        return view('admin.products.create', [
+            'categories' => $categories,
+            'discount_types' => $discount_types,
+            'tags' => $tags,
+            'colors' => $colors,
+            'sizes' => $sizes
+        ]);
     }
 
     /**
@@ -59,30 +61,27 @@ class Product extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'string|max:50|required',
-            'sku'  => 'string|max:50|required',
-            'weight' => 'string|max:50',
-            'dimension' => 'string|max:50',
-            'price' => 'required',
-            'category_id' => 'required',
-            'color_id' => 'required',
-            'size_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required'
-        ],
-        [],
-        [
-            'category_id' => 'category',
-            'color_id' => 'color',
-            'size_id' => 'size'
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'string|max:50|required',
+                'sku'  => 'string|max:50|required',
+                'weight' => 'string|max:50',
+                'dimension' => 'string|max:50',
+                'price' => 'required',
+                'category_id' => 'required',
+            ],
+            [],
+            [
+                'category_id' => 'category',
+            ]
+        );
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return back()->withErrors($validator)
-                         ->withInput();
+                ->withInput();
         }
-        
+
         $product = ModelsProduct::create([
             'name' => $request->name,
             'sku'  => $request->sku,
@@ -101,15 +100,14 @@ class Product extends Controller
             'category_id' => $request->category_id
         ]);
 
-        if($request->hasFile('images'))
-        {
+        if ($request->hasFile('images')) {
             $uploade_path = 'uploads/products/';
 
             foreach ($request->file('images') as $imagefile) {
                 $name = $imagefile->getClientOriginalName();
                 // $imagefile->move(public_path().'/assets/images/products/', $name);  
-                $imagefile->move($uploade_path, $name);  
-                $image_url = $uploade_path.$name;
+                $imagefile->move($uploade_path, $name);
+                $image_url = $uploade_path . $name;
 
                 $product->image()->create([
                     'image' => $image_url
@@ -117,24 +115,21 @@ class Product extends Controller
             }
         }
 
-        if($request->wish)
-        {
+        if ($request->wish) {
             $product->wishList()->create([
                 'status' => $request->wish ? 'In stock' : ''
             ]);
         }
 
-        if($request->tag_id)
-        {
-            foreach($request->tag_id as $tag)
-            {
+        if ($request->tag_id) {
+            foreach ($request->tag_id as $tag) {
                 $product->product_tags()->create([
                     'tag_id' => $tag
                 ]);
             }
         }
 
-        for($i = 0; $i < count($request->product_color_id); $i++) {
+        for ($i = 0; $i < count($request->product_color_id); $i++) {
             $product->general_info()->create([
                 'color_id' => $request->product_color_id[$i],
                 'size_id' => $request->product_size_id[$i],
@@ -142,7 +137,7 @@ class Product extends Controller
                 'price' => $request->price2[$i]
             ]);
         }
-        
+
         return redirect()->route('index.product');
     }
 
@@ -157,16 +152,15 @@ class Product extends Controller
         $product = ModelsProduct::findOrFail($id);
         $data['product'] = $product;
         // dd($product->wishList);
-        if ( count($product->wishList) > 0 ) {
-            foreach($product->wishList as $wish){ 
-                if ($wish->product_id == $product->id ) {
+        if (count($product->wishList) > 0) {
+            foreach ($product->wishList as $wish) {
+                if ($wish->product_id == $product->id) {
                     $data['wishlist_check'] = true;
                     break;
-                }
-                else $data['wishlist_check'] = false;
+                } else $data['wishlist_check'] = false;
             }
         } else $data['wishlist_check'] = false;
-        
+
 
         $data['tags'] = Tag::all();
         $data['colors'] = Color::all();
@@ -188,28 +182,25 @@ class Product extends Controller
     {
         // dd($request);
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'string|max:50|required',
-            'sku'  => 'string|max:50|required',
-            'weight' => 'string|max:50',
-            'dimension' => 'string|max:50',
-            'price' => 'required',
-            'category_id' => 'required',
-            'color_id' => 'required',
-            'size_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required'
-        ], 
-        [], 
-        [
-            'category_id' => 'category',
-            'color_id' => 'color',
-            'size_id' => 'size'
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'string|max:50|required',
+                'sku'  => 'string|max:50|required',
+                'weight' => 'string|max:50',
+                'dimension' => 'string|max:50',
+                'price' => 'required',
+                'category_id' => 'required',
+            ],
+            [],
+            [
+                'category_id' => 'category',
+            ]
+        );
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return back()->withErrors($validator)
-                         ->withInput();
+                ->withInput();
         }
 
         $product = ModelsProduct::findOrFail($id);
@@ -231,52 +222,95 @@ class Product extends Controller
         $product->category_id = $request->category_id;
         $product->save();
 
-        if($request->wish)
-        {
-            $product->wishList()->update([
-                'status' => $request->wish ? 'In stock' : ''
-            ]);
-        }
-        // $wish_list = Wish_list::where('product_id', $id);
-        
-        if($request->tag_id)
-        {
-            $product->product_tags()->delete();
-            foreach($request->tag_id as $tag)
-            {
-                $product->product_tags()->create([
-                    'tag_id' => $tag
+        $wishListRows = Wish_list::where('product_id', $id)->get();
+        if ($request->wish) {
+            if (count($wishListRows) > 0) {
+                $product->wishList()->update([
+                    'status' => $request->wish ? 'In stock' : ''
                 ]);
+            } else {
+                $product->wishList()->create([
+                    'status' => $request->wish ? 'In stock' : ''
+                ]);
+            }
+        } else {
+            if (count($wishListRows) > 0) {
+                $product->wishList()->delete();
             }
         }
 
-        if($request->product_color_id)
-        {
-            $product->general_info()->delete();
-            for($i = 0; $i < count($request->product_color_id); $i++) {
-                $product->general_info()->create([
-                    'color_id' => $request->product_color_id[$i],
-                    'size_id' => $request->product_size_id[$i],
-                    'quantity' => $request->quantity[$i],
-                    'price' => $request->price2[$i]
-                ]);
+        $productTagRows = DB::table('product_tag')->where('product_id', $id)->get();
+        if ($request->tag_id) {
+            if (count($productTagRows) > 0) {
+                $product->product_tags()->delete();
+                foreach ($request->tag_id as $tag) {
+                    $product->product_tags()->create([
+                        'tag_id' => $tag
+                    ]);
+                }
+            } else {
+                foreach ($request->tag_id as $tag) {
+                    $product->product_tags()->create([
+                        'tag_id' => $tag
+                    ]);
+                }
+            }
+        } else {
+            if (count($productTagRows) > 0) {
+                $product->product_tags()->delete();
             }
         }
 
-        if($request->hasfile('images'))
-        {
+        if ($request->hasfile('images')) {
             $uploade_path = 'uploads/products/';
 
             foreach ($request->file('images') as $imagefile) {
-                $name = $imagefile->getClientOriginalName(); 
-                $imagefile->move($uploade_path, $name);  
-                $image_url = $uploade_path.$name;
+                $name = $imagefile->getClientOriginalName();
+                $imagefile->move($uploade_path, $name);
+                $image_url = $uploade_path . $name;
 
                 $product->image()->create([
                     'image' => $image_url,
-                    'product_id' => $product->id 
+                    'product_id' => $product->id
                 ]);
             }
+        }
+
+        $generalInfoRows = DB::table('general_info')->where('product_id', $id)->get();
+        if ($request->countRow) {
+            for ($i = 0; $i < count($request->countRow); $i++) {
+                $color_id = $request->product_color_id[$i];
+                $size_id = $request->product_size_id[$i];
+                $quantity = $request->quantity[$i];
+                $price = $request->price2[$i];
+            }
+
+            if ($color_id != "" && $size_id != "" && $quantity != "" && $price != "") {
+                if (count($generalInfoRows) > 0) {
+                    $product->general_info()->delete();
+                    for ($i = 0; $i < count($request->product_color_id); $i++) {
+                        $product->general_info()->create([
+                            'color_id' => $request->product_color_id[$i],
+                            'size_id' => $request->product_size_id[$i],
+                            'quantity' => $request->quantity[$i],
+                            'price' => $request->price2[$i]
+                        ]);
+                    }
+                } else {
+                    for ($i = 0; $i < count($request->product_color_id); $i++) {
+                        $product->general_info()->create([
+                            'color_id' => $request->product_color_id[$i],
+                            'size_id' => $request->product_size_id[$i],
+                            'quantity' => $request->quantity[$i],
+                            'price' => $request->price2[$i]
+                        ]);
+                    }
+                }
+            } else {
+                return redirect()->back();
+            }
+        } else {
+            return redirect()->back();
         }
 
         return redirect()->route('index.product');
@@ -290,10 +324,6 @@ class Product extends Controller
      */
     public function destroy($id)
     {
-        // Delete foreign key
-        // $wish_list = Wish_list::where('product_id', $id);
-        // $wish_list->delete();
-
         $product = ModelsProduct::findOrFail($id);
 
         $product->product_tags()->delete();
@@ -309,8 +339,7 @@ class Product extends Controller
     public function destroyImage($image_id)
     {
         $product_image = Image::findOrFail($image_id);
-        if(File::exists($product_image->image))
-        {
+        if (File::exists($product_image->image)) {
             File::delete($product_image->image);
         }
 
@@ -334,29 +363,32 @@ class Product extends Controller
     {
         $color = $request->color;
         $size = $request->size;
-        
-        $prices = DB::table('general_info')
-        ->where('color_id', $color)
-        ->where('size_id', $size)
-        ->get()
-        ->first();      
 
-        if($prices) {
-            return Response::json(['price' => $prices->price,
-                                   'message' => '']);
+        $prices = DB::table('general_info')
+            ->where('color_id', $color)
+            ->where('size_id', $size)
+            ->get()
+            ->first();
+
+        if ($prices) {
+            return Response::json([
+                'price' => $prices->price,
+                'message' => ''
+            ]);
         } else {
             $product = ModelsProduct::findOrFail($id);
-            return Response::json(['price' => $product->price,
-                                   'message' => 'The product does not have this color or size']);
+            return Response::json([
+                'price' => $product->price,
+                'message' => 'The product does not have this color or size'
+            ]);
         }
     }
 
     public function addWishList($id)
     {
         $product = ModelsProduct::findOrFail($id);
-        
-        if($product)
-        {
+
+        if ($product) {
             $product->wishList()->create([
                 'status' => 'In stock'
             ]);

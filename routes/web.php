@@ -10,7 +10,6 @@ use App\Http\Controllers\admin\Wish_list;
 use App\Http\Controllers\admin\Size;
 use App\Http\Controllers\admin\Color;
 use App\Http\Controllers\admin\Tag;
-use App\Http\Controllers\client\Product as ClientProduct;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +31,7 @@ Route::get('/login', [Authentication::class, 'index'])->name('login');
 Route::post('/user-login', [Authentication::class, 'userLogin'])->name('user.login');
 
 // Router Staff
-Route::group(['prefix' => 'staff'], function() {
+Route::group(['prefix' => 'staff'], function () {
     Route::get('/', [Staff::class, 'index'])->name('index.staff');
     Route::get('/create', [Staff::class, 'create'])->name('create.staff');
     Route::post('/create', [Staff::class, 'store'])->name('create-new.staff');
@@ -42,7 +41,7 @@ Route::group(['prefix' => 'staff'], function() {
 });
 
 // Router Product
-Route::group(['prefix' => 'product'], function() {
+Route::group(['prefix' => 'product'], function () {
     Route::get('/', [Product::class, 'index'])->name('index.product');
     Route::get('/create', [Product::class, 'create'])->name('create.product');
     Route::post('/create', [Product::class, 'store'])->name('create-new.product');
@@ -57,7 +56,7 @@ Route::group(['prefix' => 'product'], function() {
 });
 
 // Router Category
-Route::group(['prefix' => 'category'], function() {
+Route::group(['prefix' => 'category'], function () {
     Route::get('/', [Category::class, 'index'])->name('index.category');
     Route::get('/create', [Category::class, 'create'])->name('create.category');
     Route::post('/create', [Category::class, 'store'])->name('create-new.category');
@@ -67,7 +66,7 @@ Route::group(['prefix' => 'category'], function() {
 });
 
 // Router Discount Type
-Route::group(['prefix' => 'discount-type'], function() {
+Route::group(['prefix' => 'discount-type'], function () {
     Route::get('/', [Discount_type::class, 'index'])->name('index.discount-type');
     Route::get('/create', [Discount_type::class, 'create'])->name('create.discount-type');
     Route::post('/create', [Discount_type::class, 'store'])->name('create-new.discount-type');
@@ -77,7 +76,7 @@ Route::group(['prefix' => 'discount-type'], function() {
 });
 
 // Router Wish List
-Route::group(['prefix' => 'wish-list'], function() {
+Route::group(['prefix' => 'wish-list'], function () {
     Route::get('/', [Wish_list::class, 'index'])->name('index.wish-list');
     Route::get('/create', [Wish_list::class, 'create'])->name('create.wish-list');
     Route::post('/create', [Wish_list::class, 'store'])->name('create-new.wish-list');
@@ -87,7 +86,7 @@ Route::group(['prefix' => 'wish-list'], function() {
 });
 
 // Router Size
-Route::group(['prefix' => 'size'], function() {
+Route::group(['prefix' => 'size'], function () {
     Route::get('/', [Size::class, 'index'])->name('index.size');
     Route::get('/create', [Size::class, 'create'])->name('create.size');
     Route::post('/create', [Size::class, 'store'])->name('create-new.size');
@@ -97,7 +96,7 @@ Route::group(['prefix' => 'size'], function() {
 });
 
 // Router Color
-Route::group(['prefix' => 'color'], function() {
+Route::group(['prefix' => 'color'], function () {
     Route::get('/', [Color::class, 'index'])->name('index.color');
     Route::get('/create', [Color::class, 'create'])->name('create.color');
     Route::post('/create', [Color::class, 'store'])->name('create-new.color');
@@ -107,7 +106,7 @@ Route::group(['prefix' => 'color'], function() {
 });
 
 // Router Tag
-Route::group(['prefix' => 'tag'], function() {
+Route::group(['prefix' => 'tag'], function () {
     Route::get('/', [Tag::class, 'index'])->name('index.tag');
     Route::get('/create', [Tag::class, 'create'])->name('create.tag');
     Route::post('/create', [Tag::class, 'store'])->name('create-new.tag');
